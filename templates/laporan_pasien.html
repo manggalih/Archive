@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Laporan Hasil Pemeriksaan Pasien</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+
+        @page{
+            size:A4;
+            margin:18mm;
+        }
+
+        body{
+
+            font-family:"Times New Roman", serif;
+
+            background:#e5e7eb;
+
+            margin:0;
+
+            display:flex;
+
+            justify-content:center;
+
+            -webkit-print-color-adjust:exact;
+        }
+
+        .paper{
+
+            width:210mm;
+
+            min-height:297mm;
+
+            background:white;
+
+            padding:16mm 14mm;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
+
+            border-radius:10px;
+
+            position:relative;
+        }
+
+        /* ================= WATERMARK ================= */
+
+        .watermark{
+
+            position:absolute;
+
+            top:55%;
+
+            left:50%;
+
+            transform:translate(-50%, -50%);
+
+            width:260px;
+
+            opacity:0.05;
+
+            z-index:0;
+        }
+
+        .header,
+        .title,
+        .table,
+        .hasil-wrapper,
+        .tanggal,
+        .footer{
+
+            position:relative;
+
+            z-index:1;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header{
+
+            text-align:center;
+        }
+
+        .logo{
+
+            width:85px;
+
+            margin-bottom:10px;
+        }
+
+        .header h2{
+
+            font-size:26px;
+
+            margin:6px 0;
+        }
+
+        .header p{
+
+            font-size:16px;
+
+            margin:3px 0;
+        }
+
+        .line{
+
+            margin:18px 0;
+
+            border-top:2px solid #2a5298;
+
+            border-bottom:1px solid #aaa;
+
+            height:3px;
+        }
+
+        .title{
+
+            text-align:center;
+
+            font-weight:bold;
+
+            font-size:20px;
+
+            margin:22px 0 26px;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table{
+
+            width:100%;
+
+            border-collapse:collapse;
+        }
+
+        .table td{
+
+            padding:12px 6px;
+
+            border-bottom:1px solid #eee;
+
+            font-size:16px;
+
+            vertical-align:top;
+        }
+
+        .label{
+
+            width:220px;
+
+            font-weight:bold;
+        }
+
+        /* ================= HASIL ================= */
+
+        .hasil-wrapper{
+
+            margin-top:25px;
+        }
+
+        .hasil-title{
+
+            font-size:20px;
+
+            font-weight:bold;
+
+            margin-bottom:18px;
+
+            color:#2a5298;
+        }
+
+        .obat-box{
+
+            border:1.8px solid rgba(42,82,152,0.7);
+
+            border-radius:12px;
+
+            padding:22px;
+
+            margin-bottom:22px;
+
+            background:#fafcff;
+        }
+
+        .obat-box:last-child{
+
+            margin-bottom:0;
+        }
+
+        .bagian-title{
+
+            font-size:18px;
+
+            font-weight:bold;
+
+            color:#2a5298;
+
+            margin-bottom:15px;
+
+            border-bottom:1px solid #dbe4ff;
+
+            padding-bottom:8px;
+        }
+
+        .isi-item{
+
+            margin-bottom:10px;
+
+            font-size:16px;
+
+            line-height:1.7;
+        }
+
+        .isi-item strong{
+
+            display:inline-block;
+
+            width:180px;
+        }
+
+        .obat-nama{
+
+            font-size:22px;
+
+            font-weight:bold;
+
+            color:#2a5298;
+
+            margin:10px 0;
+        }
+
+        .keterangan-box{
+
+            margin-top:15px;
+
+            background:#f4f7ff;
+
+            padding:14px;
+
+            border-radius:10px;
+
+            border:1px solid #d7e1ff;
+
+            line-height:1.8;
+
+            font-size:15px;
+
+            color:#333;
+
+            text-align:justify;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .tanggal{
+
+            margin-top:30px;
+
+            font-size:16px;
+        }
+
+        .footer{
+
+            margin-top:70px;
+
+            display:flex;
+
+            justify-content:flex-end;
+        }
+
+        .ttd-line{
+
+            width:240px;
+
+            text-align:center;
+
+            font-size:15px;
+        }
+
+        .ttd-space{
+
+            height:70px;
+        }
+
+        .line-ttd{
+
+            border-top:1px solid black;
+
+            margin-top:5px;
+        }
+
+        /* ================= PRINT ================= */
+
+        @media print{
+
+            body{
+
+                display:block;
+
+                background:white;
+            }
+
+            .paper{
+
+                width:210mm;
+
+                min-height:297mm;
+
+                margin:0;
+
+                box-shadow:none;
+
+                border-radius:0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="paper">
+
+    <!-- WATERMARK -->
+    <img
+        src="{{ url_for('static', filename='logo_klinik_final.png') }}"
+        class="watermark"
+    >
+
+    <!-- HEADER -->
+    <div class="header">
+
+        <img
+            src="{{ url_for('static', filename='logo_klinik_final.png') }}"
+            class="logo"
+        >
+
+        <h2>KLINIK TRI SALIMAH</h2>
+
+        <p>
+            Jl. Pramuka, RT.02/RW.03, Kedungwringin
+        </p>
+
+        <p>
+            Kec. Patikraja, Kabupaten Banyumas
+        </p>
+
+        <p>
+            Telp: 0858-7615-0875
+        </p>
+
+    </div>
+
+    <div class="line"></div>
+
+    <!-- TITLE -->
+    <div class="title">
+
+        LAPORAN HASIL PEMERIKSAAN PASIEN
+
+    </div>
+
+    <!-- DATA PASIEN -->
+    <table class="table">
+
+        <tr>
+
+            <td class="label">
+                Nama
+            </td>
+
+            <td>
+                : {{ p.nama }}
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="label">
+                Jenis Kelamin
+            </td>
+
+            <td>
+                : {{ p.gender }}
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="label">
+                Usia
+            </td>
+
+            <td>
+                : {{ p.usia }} tahun
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="label">
+                Keluhan Pasien
+            </td>
+
+            <td>
+                : {{ p.keluhan }}
+            </td>
+
+        </tr>
+
+    </table>
+
+    <!-- ================= HASIL REKOMENDASI ================= -->
+
+    <div class="hasil-wrapper">
+        <div class="hasil-title">
+            Hasil Analisis Rekomendasi per Keluhan
+        </div>
+
+        {% if hasil_list %}
+            {% for keluhan_group in hasil_list %}
+            <div style="margin-top: 15px; margin-bottom: 10px;">
+                <h3 style="color: #2a5298; border-bottom: 2px solid #2a5298; display: inline-block; padding-bottom: 3px; font-size: 18px;">
+                    Keluhan: {{ keluhan_group.keluhan }}
+                </h3>
+            </div>
+
+            {% for item in keluhan_group.top_3 %}
+            <div class="obat-box">
+                <div class="bagian-title">
+                    Rekomendasi Ke-{{ item.rank }} {% if item.rank == 1 %}(Obat Utama){% endif %}
+                </div>
+
+                <div class="isi-item">
+                    <strong>Nama Obat:</strong>
+                </div>
+
+                <div class="obat-nama">
+                    {{ item.obat }}
+                </div>
+
+                <div class="isi-item">
+                    <strong>Obat Pendamping:</strong>
+                    <br>
+                    {{ item.obat_pendamping }}
+                </div>
+
+                <div class="keterangan-box">
+                    <strong>Keterangan:</strong>
+                    <br><br>
+                    {{ item.keterangan }}
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+        {% else %}
+            <div class="obat-box">
+                Tidak ada data rekomendasi obat.
+            </div>
+        {% endif %}
+    </div>
+
+
+    <!-- KETERANGAN -->
+    <div class="tanggal">
+
+        <strong>Tanggal Pemeriksaan:</strong>
+
+        {{ p.tanggal }}
+
+    </div>
+
+    <!-- TTD -->
+    <div class="footer">
+
+        <div class="ttd-line">
+
+            Dokter / Petugas Klinik
+
+            <div class="ttd-space"></div>
+
+            <div class="line-ttd"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    window.onload = function(){
+
+        window.print();
+
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Laporan Klinik Tri Salimah</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Segoe UI', sans-serif;
+            background:#f4f6f9;
+            display:flex;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar{
+            width:220px;
+            min-width:220px;
+            background:linear-gradient(180deg,#1e3c72,#2a5298);
+            color:white;
+            min-height:100vh;
+            padding:25px 20px;
+        }
+
+        .sidebar ul{
+            list-style:none;
+        }
+
+        .sidebar ul li{
+            margin-bottom:15px;
+        }
+
+        .sidebar ul li a{
+            color:white;
+            text-decoration:none;
+            display:block;
+            padding:10px;
+            border-radius:6px;
+            opacity:0.9;
+            font-size:15px;
+            transition:0.3s;
+        }
+
+        .sidebar ul li a:hover{
+            opacity:1;
+            background:rgba(255,255,255,0.15);
+        }
+
+        .sidebar ul li a.active{
+            background:rgba(255,255,255,0.25);
+            font-weight:600;
+            box-shadow:inset 3px 0 0 #ffffff;
+        }
+
+        /* ================= LOGO ================= */
+
+        .logo-box{
+            text-align:center;
+            margin-bottom:25px;
+        }
+
+        .logo-img{
+            width:85px;
+            height:85px;
+            border-radius:50%;
+            background:white;
+            padding:6px;
+            margin-bottom:10px;
+        }
+
+        .logo-box h2{
+            font-size:18px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main{
+            flex:1;
+            padding:40px;
+        }
+
+        .title{
+            font-size:28px;
+            font-weight:700;
+            color:#1e3c72;
+            margin-bottom:25px;
+        }
+
+        /* ================= CARD ================= */
+
+        .card{
+            background:white;
+            padding:22px;
+            border-radius:14px;
+            box-shadow:0 6px 20px rgba(0,0,0,0.05);
+            margin-bottom:25px;
+        }
+
+        .card h3{
+            margin-bottom:18px;
+            color:#1e3c72;
+            font-size:20px;
+        }
+
+        /* ================= TABLE ================= */
+
+        .modern-table{
+            width:100%;
+            border-collapse:collapse;
+            table-layout:fixed;
+        }
+
+        .modern-table thead th{
+            background:#1e3c72;
+            color:white;
+            padding:14px 10px;
+            font-size:14px;
+            text-align:center;
+        }
+
+        .modern-table td{
+            padding:13px 10px;
+            border-bottom:1px solid #eee;
+            font-size:14px;
+            vertical-align:middle;
+            word-wrap:break-word;
+        }
+
+        .modern-table tr:hover{
+            background:#f5f7fb;
+        }
+
+        /* ================= COLUMN WIDTH ================= */
+
+        .modern-table th:nth-child(1),
+        .modern-table td:nth-child(1){
+            width:8%;
+            text-align:center;
+        }
+
+        .modern-table th:nth-child(2),
+        .modern-table td:nth-child(2){
+            width:62%;
+            text-align:left;
+            padding-left:18px;
+        }
+
+        .modern-table th:nth-child(3),
+        .modern-table td:nth-child(3){
+            width:30%;
+            text-align:center;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty{
+            text-align:center;
+            padding:20px;
+            color:#777;
+            font-size:14px;
+        }
+
+        /* ================= INFO ================= */
+
+        .info-text{
+            font-size:14px;
+            line-height:1.8;
+            color:#444;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .btn-print{
+            padding:12px 24px;
+            background:#1e3c72;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:14px;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .btn-print:hover{
+            background:#2a5298;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:900px){
+
+            body{
+                display:block;
+            }
+
+            .sidebar{
+                width:100%;
+                min-width:100%;
+                min-height:auto;
+            }
+
+            .main{
+                padding:20px;
+            }
+
+            .modern-table{
+                font-size:12px;
+            }
+
+            .modern-table td,
+            .modern-table th{
+                padding:10px 6px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+    <div class="logo-box">
+
+        <img
+            src="/static/logo_klinik_final.png"
+            class="logo-img"
+        >
+
+        <h2>Klinik Tri Salimah</h2>
+
+    </div>
+
+    <ul>
+
+        <li>
+
+            <a
+                href="/"
+                class="{% if request.path == '/' %}active{% endif %}"
+            >
+                Dashboard
+            </a>
+
+        </li>
+
+        <li>
+
+            <a
+                href="/pasien"
+                class="{% if request.path.startswith('/pasien') %}active{% endif %}"
+            >
+                Data Pasien
+            </a>
+
+        </li>
+
+        <li>
+
+            <a
+                href="/laporan"
+                class="{% if request.path.startswith('/laporan') %}active{% endif %}"
+            >
+                Laporan
+            </a>
+
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+    <div class="title">
+
+        Laporan Data Pasien
+
+    </div>
+
+    <!-- ================= GENDER ================= -->
+
+    <div class="card">
+
+        <h3>Distribusi Jenis Kelamin</h3>
+
+        {% if gender_stat %}
+
+        <table class="modern-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Jumlah</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for k, v in gender_stat.items() %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    <td>{{ k }}</td>
+
+                    <td>{{ v }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            Belum ada data jenis kelamin.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- ================= DIAGNOSA ================= -->
+
+    <div class="card">
+
+        <h3>Distribusi Keluhan Pasien</h3>
+
+        {% if keluhan_stat %}
+
+        <table class="modern-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+                    <th>Keluhan</th>
+                    <th>Jumlah Kasus</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for k, v in keluhan_stat.items() %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    <td>{{ k }}</td>
+
+                    <td>{{ v }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            Belum ada data keluhan.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- ================= OBAT ================= -->
+
+    <div class="card">
+
+        <h3>Distribusi Rekomendasi Obat</h3>
+
+        {% if obat_stat %}
+
+        <table class="modern-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+                    <th>Nama Obat</th>
+                    <th>Jumlah</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for k, v in obat_stat.items() %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    <td>{{ k }}</td>
+
+                    <td>{{ v }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            Belum ada data obat.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- ================= PENJELASAN ================= -->
+
+    <div class="card">
+
+        <div class="info-text">
+
+            Laporan ini dihasilkan dari sistem rekomendasi obat berbasis
+            <b>Machine Learning</b> menggunakan metode
+            <b>TF-IDF</b> dan algoritma
+            <b>Random Forest</b>.
+
+        </div>
+
+    </div>
+
+    <!-- ================= BUTTON PRINT ================= -->
+
+    <a
+        href="{{ url_for('print_laporan') }}"
+        target="_blank"
+    >
+
+        <button class="btn-print">
+
+            Print Laporan
+
+        </button>
+
+    </a>
+
+</div>
+
+</body>
+</html>

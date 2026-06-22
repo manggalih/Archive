@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Data Pasien Klinik Tri Salimah</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Segoe UI', sans-serif;
+            background:#f4f7fb;
+            display:flex;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar{
+            width:180px;
+            min-width:180px;
+            min-height:100vh;
+            background:linear-gradient(180deg,#1e3c72,#2a5298);
+            color:white;
+            padding:20px 14px;
+            position:fixed;
+            left:0;
+            top:0;
+        }
+
+        .logo-box{
+            text-align:center;
+            margin-bottom:28px;
+        }
+
+        .logo-img{
+            width:70px;
+            height:70px;
+            object-fit:contain;
+            border-radius:50%;
+            background:white;
+            padding:5px;
+            margin-bottom:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .logo-box h2{
+            font-size:16px;
+            font-weight:600;
+            line-height:1.4;
+        }
+
+        .sidebar ul{
+            list-style:none;
+            margin-top:20px;
+        }
+
+        .sidebar ul li{
+            margin-bottom:10px;
+        }
+
+        .sidebar ul li a{
+            color:white;
+            text-decoration:none;
+            display:block;
+            padding:10px 12px;
+            border-radius:10px;
+            transition:0.3s;
+            font-size:14px;
+            font-weight:600;
+        }
+
+        .sidebar ul li a:hover{
+            background:rgba(255,255,255,0.15);
+        }
+
+        .sidebar ul li a.active{
+            background:rgba(255,255,255,0.25);
+        }
+
+        /* ================= MAIN ================= */
+
+        .main{
+            flex:1;
+            margin-left:180px;
+            width:calc(100% - 180px);
+            padding:24px 20px;
+        }
+
+        .title{
+            margin-bottom:18px;
+            font-size:24px;
+            color:#1e3c72;
+            font-weight:700;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:16px;
+            margin-bottom:22px;
+        }
+
+        .stat-box{
+            background:white;
+            padding:20px;
+            border-radius:16px;
+            text-align:center;
+            box-shadow:0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat-box h3{
+            font-size:34px;
+            color:#1e3c72;
+            margin-bottom:5px;
+            font-weight:800;
+        }
+
+        .stat-box p{
+            font-size:14px;
+            color:#666;
+            font-weight:600;
+        }
+
+        /* ================= SEARCH ================= */
+
+        .search-box{
+            display:flex;
+            justify-content:flex-end;
+            margin-bottom:18px;
+        }
+
+        .search-box input{
+            width:300px;
+            padding:11px 14px;
+            border-radius:12px;
+            border:1px solid #ccc;
+            font-size:13px;
+            transition:0.3s;
+        }
+
+        .search-box input:focus{
+            outline:none;
+            border:1px solid #2a5298;
+            box-shadow:0 0 0 3px rgba(42,82,152,0.1);
+        }
+
+        /* ================= CARD ================= */
+
+        .card{
+            background:white;
+            padding:18px;
+            border-radius:16px;
+            box-shadow:0 2px 15px rgba(0,0,0,0.05);
+            overflow-x:auto;
+        }
+
+        /* ================= TABLE ================= */
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        thead th{
+            background:#1e3c72;
+            color:white;
+            padding:14px 12px;
+            text-align:center;
+            font-size:13px;
+            font-weight:700;
+        }
+
+        tbody td{
+            padding:14px 12px;
+            border-bottom:1px solid #eee;
+            font-size:13px;
+            vertical-align:top;
+            line-height:1.8;
+            color:#333;
+        }
+
+        tbody tr:hover{
+            background:#f8fbff;
+        }
+
+        /* ================= COLUMN ================= */
+
+        th:nth-child(1),
+        td:nth-child(1){
+            width:5%;
+            text-align:center;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2){
+            width:12%;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3){
+            width:8%;
+            text-align:center;
+        }
+
+        th:nth-child(4),
+        td:nth-child(4){
+            width:6%;
+            text-align:center;
+        }
+
+        th:nth-child(5),
+        td:nth-child(5){
+            width:24%;
+        }
+
+        th:nth-child(6),
+        td:nth-child(6){
+            width:16%;
+        }
+
+        th:nth-child(7),
+        td:nth-child(7){
+            width:18%;
+        }
+
+        th:nth-child(8),
+        td:nth-child(8){
+            width:12%;
+            text-align:center;
+        }
+
+        th:nth-child(9),
+        td:nth-child(9){
+            width:8%;
+            text-align:center;
+        }
+
+        /* ================= OBAT ================= */
+
+        .obat-text{
+            word-break:break-word;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .btn-print{
+            background:#1e3c72;
+            color:white;
+            border:none;
+            padding:8px 16px;
+            border-radius:20px;
+            cursor:pointer;
+            transition:0.3s;
+            font-size:12px;
+            font-weight:600;
+        }
+
+        .btn-print:hover{
+            background:#2a5298;
+            transform:translateY(-1px);
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty{
+            text-align:center;
+            padding:30px;
+            color:#666;
+            font-size:15px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:900px){
+
+            body{
+                display:block;
+            }
+
+            .sidebar{
+                position:relative;
+                width:100%;
+                min-width:100%;
+                min-height:auto;
+            }
+
+            .main{
+                margin-left:0;
+                width:100%;
+                padding:18px;
+            }
+
+            .stats{
+                grid-template-columns:1fr;
+            }
+
+            .search-box{
+                justify-content:center;
+            }
+
+            .search-box input{
+                width:100%;
+            }
+
+            table{
+                font-size:12px;
+            }
+
+            thead th,
+            tbody td{
+                padding:10px 8px;
+            }
+
+        }
+
+    </style>
+
+    <script>
+
+        function searchTable(){
+
+            let input = document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+            let rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+
+                let text = row.innerText.toLowerCase();
+
+                row.style.display =
+                    text.includes(input)
+                    ? ""
+                    : "none";
+
+            });
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+    <div class="logo-box">
+
+        <img
+            src="/static/logo_klinik_final.png"
+            class="logo-img"
+        >
+
+        <h2>Klinik Tri Salimah</h2>
+
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="/">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="/pasien" class="active">
+                Data Pasien
+            </a>
+        </li>
+
+        <li>
+            <a href="/laporan">
+                Laporan
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+    <h2 class="title">
+        Histori Data Pasien
+    </h2>
+
+    <!-- ================= STATS ================= -->
+
+    <div class="stats">
+
+        <div class="stat-box">
+
+            <h3>
+                {{ data|length }}
+            </h3>
+
+            <p>Total Pasien</p>
+
+        </div>
+
+        <div class="stat-box">
+
+            <h3>
+                {{ data | map(attribute='obat') | list | unique | list | length }}
+            </h3>
+
+            <p>Jenis Obat</p>
+
+        </div>
+
+        <div class="stat-box">
+
+            <h3>
+                {{ data | map(attribute='keluhan') | list | unique | list | length }}
+            </h3>
+
+            <p>Variasi Keluhan</p>
+
+        </div>
+
+    </div>
+
+    <!-- ================= SEARCH ================= -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            onkeyup="searchTable()"
+            placeholder="Cari data pasien..."
+        >
+
+    </div>
+
+    <!-- ================= TABLE ================= -->
+
+    <div class="card">
+
+        {% if data|length == 0 %}
+
+            <div class="empty">
+                Belum ada data pasien.
+            </div>
+
+        {% else %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Gender</th>
+                    <th>Usia</th>
+                    <th>Keluhan</th>
+                    <!-- <th>Diagnosa</th> -->
+                    <th>Obat</th>
+                    <th>Tanggal</th>
+                    <th>Aksi</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for p in data %}
+
+                <tr>
+
+                    <td>
+                        {{ loop.index }}
+                    </td>
+
+                    <td>
+                        {{ p.nama }}
+                    </td>
+
+                    <td>
+                        {{ p.gender }}
+                    </td>
+
+                    <td>
+                        {{ p.usia }}
+                    </td>
+
+                    <td>
+                        {{ p.keluhan }}
+                    </td>
+
+                    <!-- <td>
+                        {{ p.diagnosa }}
+                    </td> -->
+
+                    <td class="obat-text">
+                        {{ p.obat }}
+                    </td>
+
+                    <td>
+                        {{ p.tanggal if p.tanggal else '-' }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{{ url_for('print_data', index=loop.index0) }}"
+                            target="_blank"
+                        >
+
+                            <button class="btn-print">
+                                Print
+                            </button>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
