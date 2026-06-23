@@ -718,7 +718,7 @@ def predict():
 
     histori_baru = pd.DataFrame([{
         "id": str(uuid.uuid4())[:8],
-        "tanggal": datetime.now().strftime("%d-%m-%Y %H:%M"),
+        "tanggal": datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
         "nama": nama,
         "gender": gender,
         "usia": usia,
