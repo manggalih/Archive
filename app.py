@@ -17,6 +17,7 @@ from flask import (
 )
 
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 # ==============================
 # FLASK
@@ -484,9 +485,7 @@ def print_laporan():
             keluhan_stat={},
             obat_stat={},
             total=0,
-            tanggal_cetak=datetime.now().strftime(
-                "%d-%m-%Y"
-            )
+            tanggal_cetak=datetime.now(    ZoneInfo("Asia/Jakarta")).strftime("%d-%m-%Y")
         )
 
     return render_template(
@@ -506,9 +505,7 @@ def print_laporan():
 
         total=len(df),
 
-        tanggal_cetak=datetime.now().strftime(
-            "%d-%m-%Y"
-        )
+        tanggal_cetak=datetime.now(    ZoneInfo("Asia/Jakarta")).strftime("%d-%m-%Y")
     )
 
 # ==============================
@@ -718,7 +715,7 @@ def predict():
 
     histori_baru = pd.DataFrame([{
         "id": str(uuid.uuid4())[:8],
-        "tanggal": datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
+        "tanggal": datetime.now(ZoneInfo("Asia/Jakarta")).strftime("%d-%m-%Y %H:%M:%S"),
         "nama": nama,
         "gender": gender,
         "usia": usia,
