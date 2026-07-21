@@ -342,148 +342,182 @@
             background:#163b7a;
         }
 
-        /* ================= RESULT ================= */
+    /* ================= RESULT ================= */
 
-        .result-box{
+    .result-box{
+        margin-top:20px;
+        background:#f7fbfa;
+        border-radius:16px;
+        padding:18px;
+        border:1px solid #d9efea;
+    }
 
-            margin-top:20px;
+    .success{
+        border:1px solid #d6f0ea;
+    }
 
-            background:#f7fbfa;
+    .error{
+        background:#ffe8e8;
+        color:red;
+        font-size:13px;
+    }
 
-            border-radius:16px;
+    /* ================= PASIEN INFO ================= */
 
-            padding:18px;
+    .pasien-info{
+        background:#fff;
+        padding:14px 16px;
+        border-radius:12px;
+        margin-bottom:18px;
+        line-height:1.7;
+        color:#444;
+        font-size:12px;
+        box-shadow:0 2px 8px rgba(0,0,0,.03);
+    }
 
-            border:1px solid #d9efea;
-        }
+    .pasien-info b{
+        color:#111;
+    }
 
-        .success{
-            border:1px solid #d6f0ea;
-        }
+    /* ================= HASIL TITLE ================= */
 
-        .error{
-            background:#ffe8e8;
-            color:red;
-            font-size:13px;
-        }
+    .hasil-title{
+        font-size:20px;
+        font-weight:800;
+        color:#163b7a;
+        margin-bottom:18px;
+    }
 
-        /* ================= PASIEN INFO ================= */
+    /* ================= HASIL CARD ================= */
 
-        .pasien-info{
+    .hasil-card{
+        background:linear-gradient(135deg,#14b8a6,#20c7b5);
+        border-radius:20px;
+        padding:24px;
+        margin-bottom:24px;
+        color:#fff;
+        box-shadow:0 10px 25px rgba(0,0,0,.12);
+        border:1px solid rgba(255,255,255,.15);
+    }
 
-            background:white;
+    /* ================= TOP ================= */
 
-            padding:14px 16px;
+    .hasil-top{
+        display:grid;
+        grid-template-columns:2.3fr 2.4fr .9fr;
+        gap:20px;
+        align-items:center;
+    }
 
-            border-radius:12px;
+    /* ================= OBAT UTAMA ================= */
 
-            margin-bottom:18px;
+    .top-info{
+        display:flex;
+        align-items:center;
+        gap:14px;
+        min-height:110px;
+    }
 
-            line-height:1.7;
+    /* ================= OBAT PENDAMPING ================= */
 
-            color:#444;
+.pendamping-box{
+    min-height:110px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 
-            font-size:12px;
+    padding-left:24px;
+    margin:12px 0;
 
-            box-shadow:0 2px 8px rgba(0,0,0,0.03);
-        }
+    border-left:2px solid rgba(255,255,255,.30);
+}
 
-        .pasien-info b{
-            color:#111;
-        }
+    .pendamping-title{
+        font-size:12px;
+        font-weight:700;
+        margin-bottom:8px;
+        text-transform:uppercase;
+    }
 
-        /* ================= HASIL TITLE ================= */
+    .pendamping-name{
+        font-size:17px;
+        font-weight:700;
+        line-height:1.6;
+        white-space:normal;
+        word-break:break-word;
+    }
 
-        .hasil-title{
+    /* ================= KEYAKINAN MODEL ================= */
 
-            font-size:20px;
+.similarity-box{
 
-            font-weight:800;
+    min-height:110px;
 
-            color:#163b7a;
+    display:flex;
+    flex-direction:column;
 
-            margin-bottom:18px;
-        }
+    justify-content:center;
+    align-items:center;
 
-        /* ================= HASIL CARD ================= */
+    background:#fff;
+    color:#0f766e;
 
-        .hasil-card{
+    border-radius:14px;
 
-            background:linear-gradient(
-                135deg,
-                #14b8a6,
-                #20c7b5
-            );
+    padding:18px;
 
-            border-radius:16px;
+    margin-left:10px;
 
-            padding:16px;
+    text-align:center;
+}
 
-            margin-bottom:16px;
+    .similarity-box small{
+        display:block;
+        font-size:11px;
+        font-weight:600;
+        margin-bottom:6px;
+    }
 
-            color:white;
+    .similarity-box h2{
+        margin:0;
+        font-size:28px;
+        font-weight:800;
+    }
 
-            box-shadow:
-            0 4px 12px rgba(0,0,0,0.08);
-        }
+    /* ================= ICON ================= */
 
-        /* ================= TOP ================= */
+    .icon-box{
+        width:42px;
+        height:42px;
+        border-radius:50%;
+        background:#fff;
+        color:#0f766e;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:17px;
+        flex-shrink:0;
+    }
 
-        .hasil-top{
+    /* ================= TITLE ================= */
 
-            display:grid;
+    .top-title{
+        font-size:12px;
+        font-weight:700;
+        margin-bottom:6px;
+        line-height:1.3;
+    }
 
-            grid-template-columns:
-            repeat(auto-fit,minmax(180px,1fr));
+    /* ================= NAMA OBAT ================= */
 
-            gap:12px;
-
-            align-items:center;
-        }
-
-        .top-info{
-
-            display:flex;
-
-            align-items:center;
-
-            gap:10px;
-        }
-
-        .icon-box{
-
-            width:42px;
-
-            height:42px;
-
-            border-radius:50%;
-
-            background:white;
-
-            color:#0f766e;
-
-            display:flex;
-
-            align-items:center;
-
-            justify-content:center;
-
-            font-size:17px;
-
-            flex-shrink:0;
-        }
-
-        .top-title{
-
-            font-size:12px;
-
-            font-weight:700;
-
-            margin-bottom:5px;
-
-            line-height:1.3;
-        }
-
+    .obat-name{
+        font-size:26px;
+        font-weight:800;
+        color:#fff;
+        line-height:1.2;
+        letter-spacing:-.3px;
+        word-break:break-word;
+    }
         /* ================= BADGE ================= */
 
         .badge{
@@ -582,7 +616,7 @@
             background:
             rgba(255,255,255,0.08);
 
-            padding:10px;
+            padding:16px;
 
             border-radius:10px;
         }
@@ -1065,74 +1099,68 @@
 
                 <div class="hasil-top">
 
-                    <div class="top-info">
+                        <!-- Obat Utama -->
+                            <div class="top-info">
 
-                        <div class="rank-badge">
-                            {{ item.rank }}
-                        </div>
+                                <div class="rank-badge">
+                                    {{ item.rank }}
+                                </div>
 
-                        <div>
+                                <div>
 
-                            <div class="top-title">
-                                REKOMENDASI KE-{{ item.rank }}
+                                    <div class="top-title">
+                                        OBAT UTAMA
+                                    </div>
+
+                                    <div class="obat-name">
+                                        {{ item.obat }}
+                                    </div>
+
+                                </div>
+
                             </div>
 
-                            <div class="obat-name">
-                                {{ item.obat }}
+                            <!-- Obat Pendamping -->
+                            <div class="pendamping-box">
+
+                                <div class="pendamping-title">
+                                    💊 OBAT PENDAMPING
+                                </div>
+
+                                <div class="pendamping-name">
+                                    {{ item.obat_pendamping }}
+                                </div>
+
                             </div>
 
-                        </div>
+                            <!-- Persentase -->
+                            <div class="similarity-box">
 
-                    </div>
+                                <small>Keyakinan Model</small>
 
-                    <div class="similarity-box">
+                                <h2>{{ item.prob }}%</h2>
 
-                        <small>
-                            Keyakinan Model
-                        </small>
+                                <div class="prob-container">
+                                    <div class="prob-bar"
+                                        data-prob="{{ item.prob }}">
+                                    </div>
+                                </div>
 
-                        <h2>
-                            {{ item.prob }}%
-                        </h2>
-
-                        <div class="prob-container">
-                            <div class="prob-bar" data-prob="{{ item.prob }}"></div>
-                        </div>
-
-                    </div>
+                            </div>
 
                 </div>
-
-                <div class="divider"></div>
 
                 <div class="hasil-middle">
 
-                    <div class="middle-item" style="grid-column: span 2;">
+            <div class="middle-item" style="grid-column:span 3;">
 
-                        <h4>
-                            Input Gejala
-                        </h4>
+                <h4>Input Gejala</h4>
 
-                        <p>
-                            {{ keluhan_group.keluhan }}
-                        </p>
+                <p>{{ keluhan_group.keluhan }}</p>
 
-                    </div>
+            </div>
 
-                    <div class="middle-item">
-
-                        <h4>
-                            Obat Pendamping
-                        </h4>
-
-                        <p>
-                            {{ item.obat_pendamping }}
-                        </p>
-
-                    </div>
-
-                </div>
-
+        </div>
                 <div class="saran-box">
 
                     <h4>
